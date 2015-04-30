@@ -95,7 +95,7 @@ class Message:
 		if parts[3] != '11111':
 			message.aircraft_id = _parse_or_none(parts[3], int)									
 		else:
-			message.session_id = None
+			message.aircraft_id = None
 		
 		# Aircraft Mode S hexadecimal code
 		message.hexident = _parse_or_none(parts[4].upper(), str)
