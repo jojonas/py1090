@@ -7,7 +7,7 @@ from mpl_toolkits.basemap import Basemap
 import numpy as np
 import matplotlib.pyplot as plt
 
-import dump1090 
+import py1090 
 
 from example_helpers import map_bounds, blacklist_hexidents
 
@@ -17,9 +17,9 @@ def basemap_plot_positions(filename):
 	m.fillcontinents(color='white', lake_color='white')
 	m.drawcountries()
 
-	collection = dump1090.FlightCollection()
+	collection = py1090.FlightCollection()
 
-	#with dump1090.Connection() as connection:
+	#with py1090.Connection() as connection:
 	with open(filename, 'r') as connection:
 		collection.add_list(connection)
 

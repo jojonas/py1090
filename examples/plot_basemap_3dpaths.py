@@ -9,7 +9,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 import matplotlib.pyplot as plt
 
-import dump1090
+import py1090
 
 from example_helpers import map_bounds, blacklist_hexidents
 
@@ -22,9 +22,9 @@ def basemap_plot_paths(filename):
 	ax.add_collection3d(m.drawcoastlines(linewidth=0.25))
 	ax.add_collection3d(m.drawcountries(linewidth=0.35))
 
-	collection = dump1090.FlightCollection()
+	collection = py1090.FlightCollection()
 
-	#with dump1090.Connection() as connection:
+	#with py1090.Connection() as connection:
 	with open(filename, 'r') as connection:
 		collection.add_list(connection)
 

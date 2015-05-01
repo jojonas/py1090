@@ -8,8 +8,8 @@ from mpl_toolkits.basemap import Basemap
 import numpy as np
 import matplotlib.pyplot as plt
 
-import dump1090 
-from dump1090.helpers import distance_between, bearing_between
+import py1090 
+from py1090.helpers import distance_between, bearing_between
 
 from example_helpers import calculate_map_bounds, blacklist_hexidents
 
@@ -19,8 +19,8 @@ def basemap_plot_distances(filename, home):
 
 	bins = np.zeros(N)
 	
-	collection = dump1090.FlightCollection()
-	#with dump1090.Connection() as file:
+	collection = py1090.FlightCollection()
+	#with py1090.Connection() as file:
 	with open(filename, 'r') as file:
 		collection.add_list(file)
 
