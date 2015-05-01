@@ -11,38 +11,10 @@ import matplotlib.pyplot as plt
 
 import dump1090
 
-from example_helpers import calculate_map_bounds, blacklist_hexidents
-
-class Path:
-	def __init__(self):
-		self.lats = []
-		self.lons = []
-		self.alts = []
+from example_helpers import map_bounds, blacklist_hexidents
 
 def basemap_plot_paths(filename):
-	paths = defaultdict(Path)
-	
-	lats, lons = [], []
-	#with dump1090.Connection() as file:
-	with open(filename, 'r') as file:
-		count = 0
-		for line in file:
-			count += 1
-			if count % 100 == 0:
-				print("Processing message #{:d}".format(count))
-				
-			message = dump1090.Message.from_string(line)
-			if message.latitude and message.longitude and message.altitude and message.hexident not in blacklist_hexidents:
-				if message.longitude < 3:
-					print("AAAAAAAAAAAAAAAAAAA", message.hexident)
-				paths[message.hexident].lats.append(message.latitude)
-				paths[message.hexident].lons.append(message.longitude)
-				paths[message.hexident].alts.append(message.altitude)
-				
-				lats.append(message.latitude)
-				lons.append(message.longitude)
-
-	m = Basemap(projection='merc', resolution='i', **calculate_map_bounds(lats, lons, fraction=0.3))
+	m = Basemap(projection='merc', resolution='i', **map_bounds['europe'])
 	
 	fig = plt.figure()
 	ax = Axes3D(fig)
@@ -50,20 +22,27 @@ def basemap_plot_paths(filename):
 	ax.add_collection3d(m.drawcoastlines(linewidth=0.25))
 	ax.add_collection3d(m.drawcountries(linewidth=0.35))
 
-	color_cycle = ['r', 'g', 'b', 'k', 'y', 'orange', 'purple', 'lightblue', 'gray']
-	for i, path in enumerate(paths.values()):
-		if i > 20: break
-		
-		x, y = m(path.lons, path.lats)
-		z = path.alts
+	collection = dump1090.FlightCollection()
 
-		ax.plot(x, y, z, '.-', color=color_cycle[i % len(color_cycle)])
+	#with dump1090.Connection() as connection:
+	with open(filename, 'r') as connection:
+		collection.add_list(connection)
 
-	plt.title("Paths in file '{:s}'".format(filename))
+	for flight in collection:
+		if flight.hexident in blacklist_hexidents:
+			continue
+
+		path = list(flight.path)
+		if len(path) > 1:
+			lats, lons, alts = np.array(path).T
+			x, y = m(lons, lats)
+			m.plot(x,y, alts,".-")
+	
+	plt.title("Flights in file '{:s}'".format(filename))
 	plt.show()
 	
 if __name__ == "__main__":
-	filename = "../dump.txt" # "example_recording.txt"
+	filename = "example_recording.txt"
 	
 	if not os.path.isfile(filename):
 		print("Run example 'record_raw_to_file.py' to create a sample flight recording first.")

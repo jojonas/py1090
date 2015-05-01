@@ -9,38 +9,38 @@ import matplotlib.pyplot as plt
 
 import dump1090 
 
-from example_helpers import calculate_map_bounds
+from example_helpers import map_bounds, blacklist_hexidents
 
 def basemap_plot_positions(filename):
-	#connection = dump1090.Connection()
-	database = dump1090.FlightDatabase()
-	database.load_csv(filename)
-	
-	lats, lons = [], []
-	print("Loading positions...")
-	for flight in database.flights():
-		if flight.latitude and flight.longitude:
-			print(flight.latitude, flight.longitude)
-			lats.append(flight.latitude)
-			lons.append(flight.longitude)
-	
-	m = Basemap(projection='merc', resolution='i', **calculate_map_bounds(lats, lons))
-	
-	x, y = m(lons, lats) # apply projection
-	m.scatter(x, y, 3, marker='s', color='red', zorder=1000)
-	
+	m = Basemap(projection='merc', resolution='i', **map_bounds['europe'])
 	m.drawcoastlines()
 	m.fillcontinents(color='white', lake_color='white')
 	m.drawcountries()
+
+	collection = dump1090.FlightCollection()
+
+	#with dump1090.Connection() as connection:
+	with open(filename, 'r') as connection:
+		collection.add_list(connection)
+
+	for flight in collection:
+		if flight.hexident in blacklist_hexidents:
+			continue
+
+		path = list(flight.path)
+		if len(path) > 1:
+			lats, lons, alts = np.array(path).T
+			x, y = m(lons, lats)
+			m.plot(x,y,".-")
 	
-	plt.title("Flights in Database '{:s}'".format(filename))
+	plt.title("Flights in file '{:s}'".format(filename))
 	plt.show()
 	
 if __name__ == "__main__":
-	filename = "example_flight_database.csv"
+	filename = "example_recording.txt"
 	
 	if not os.path.isfile(filename):
-		print("Run example 'persistent_flight_database.py' to create a sample database first.")
+		print("Run example 'record_raw_to_file.py' to create a sample database first.")
 	else:
 		basemap_plot_positions(filename)
 	
