@@ -1,15 +1,13 @@
 import sys, os.path
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
 
-import os.path
-
 from mpl_toolkits.basemap import Basemap
 import numpy as np
 import matplotlib.pyplot as plt
 
-import py1090 
+import py1090
 
-from example_helpers import map_bounds, blacklist_hexidents
+from example_helpers import map_bounds, blacklist_hexidents, example_data_file
 
 def basemap_plot_positions(filename):
 	m = Basemap(projection='merc', resolution='i', **map_bounds['europe'])
@@ -32,15 +30,10 @@ def basemap_plot_positions(filename):
 			lats, lons, alts = np.array(path).T
 			x, y = m(lons, lats)
 			m.plot(x,y,".-")
-	
+
 	plt.title("Flights in file '{:s}'".format(filename))
 	plt.show()
-	
+
 if __name__ == "__main__":
-	filename = "example_recording.txt"
-	
-	if not os.path.isfile(filename):
-		print("Run example 'record_raw_to_file.py' to create a sample database first.")
-	else:
-		basemap_plot_positions(filename)
-	
+	filename = example_data_file()
+	basemap_plot_positions(filename)

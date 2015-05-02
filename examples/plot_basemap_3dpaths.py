@@ -11,14 +11,14 @@ import matplotlib.pyplot as plt
 
 import py1090
 
-from example_helpers import map_bounds, blacklist_hexidents
+from example_helpers import map_bounds, blacklist_hexidents, example_data_file
 
 def basemap_plot_paths(filename):
 	m = Basemap(projection='merc', resolution='i', **map_bounds['europe'])
-	
+
 	fig = plt.figure()
 	ax = Axes3D(fig)
-	
+
 	ax.add_collection3d(m.drawcoastlines(linewidth=0.25))
 	ax.add_collection3d(m.drawcountries(linewidth=0.35))
 
@@ -37,15 +37,10 @@ def basemap_plot_paths(filename):
 			lats, lons, alts = np.array(path).T
 			x, y = m(lons, lats)
 			m.plot(x,y, alts,".-")
-	
+
 	plt.title("Flights in file '{:s}'".format(filename))
 	plt.show()
-	
+
 if __name__ == "__main__":
-	filename = "example_recording.txt"
-	
-	if not os.path.isfile(filename):
-		print("Run example 'record_raw_to_file.py' to create a sample flight recording first.")
-	else:
-		basemap_plot_paths(filename)
-	
+	filename = example_data_file()
+	basemap_plot_paths(filename)

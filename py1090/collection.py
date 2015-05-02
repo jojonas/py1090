@@ -1,14 +1,11 @@
 from collections import namedtuple, defaultdict
-import csv
-csv.register_dialect('excel-modern', delimiter=';', lineterminator='\n', quoting=csv.QUOTE_NONE)
-
 from .message import Message
 
 class FlightCollectionEntry:
 	def __init__(self):
 		self.messages = []
 		self.hexident = None
-	
+
 	def append(self, message):
 		if self.hexident is None:
 			self.hexident = message.hexident
@@ -48,7 +45,7 @@ class FlightCollectionEntry:
 class FlightCollection:
 	def __init__(self):
 		self._dictionary = defaultdict(FlightCollectionEntry)
-		
+
 	def __len__(self):
 		return len(self._dictionary)
 
@@ -63,7 +60,7 @@ class FlightCollection:
 
 	def add(self, message):
 		self._dictionary[message.hexident].append(message)
-			
+
 	def flights(self):
 		return self._dictionary.values()
 
@@ -71,4 +68,3 @@ class FlightCollection:
 		for item in list:
 			message = Message.from_string(item)
 			self.add(message)
-	
