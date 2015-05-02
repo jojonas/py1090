@@ -191,7 +191,7 @@ class Message:
 			self.emergency = _parse_bool(parts[19])
 
 		if parts[20]:
-			self.spi = _parts_bool(parts[20])
+			self.spi = _parse_bool(parts[20])
 
 		if parts[21]:
 			self.on_ground = _parse_bool(parts[21])
