@@ -288,7 +288,7 @@ code {
 }
 
 th {
-    background-color: #ede;
+    background-color: {{ theme_headbgcolor }};
 }
 
 .warning code {
