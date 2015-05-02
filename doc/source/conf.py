@@ -125,28 +125,25 @@ todo_include_todos = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-if on_rtd:
-	html_theme = 'default'
-else:
-	html_theme = 'classic'
+html_theme = 'classic'
 
-	html_theme_options = {
-		"sidebarbgcolor": "#f2f2f2",
-		"sidebartextcolor": "#000000",
-		"sidebarlinkcolor": "#101010",
+html_theme_options = {
+	"sidebarbgcolor": "#f2f2f2",
+	"sidebartextcolor": "#000000",
+	"sidebarlinkcolor": "#101010",
 
-		"headbgcolor": "#f2f2f2",
-		"headtextcolor": "#101010",
+	"headbgcolor": "#f2f2f2",
+	"headtextcolor": "#101010",
 
-		"footerbgcolor": "#101010",
-		"footertextcolor": "#ffffff",
+	"footerbgcolor": "#101010",
+	"footertextcolor": "#ffffff",
 
-		"relbarbgcolor": "#101010",
-		"relbartextcolor": "#ffffff",
+	"relbarbgcolor": "#101010",
+	"relbartextcolor": "#ffffff",
 
-		"bodyfont": "Open Sans, sans-serif",
-		"headfont": "Open Sans, sans-serif",
-	}
+	"bodyfont": "Open Sans, sans-serif",
+	"headfont": "Open Sans, sans-serif",
+}
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
