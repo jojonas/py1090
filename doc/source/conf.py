@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# py1090-python documentation build configuration file, created by
+# py1090 documentation build configuration file, created by
 # sphinx-quickstart on Fri May  1 15:40:06 2015.
 #
 # This file is execfile()d with the current directory set to its
@@ -238,7 +238,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'py1090-pythondoc'
+htmlhelp_basename = 'py1090doc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -260,7 +260,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-	(master_doc, 'py1090-python.tex', 'py1090-python Documentation',
+	(master_doc, 'py1090.tex', 'py1090 Documentation',
 	 'Jonas Lieb', 'manual'),
 ]
 
@@ -290,7 +290,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-		(master_doc, 'py1090-python', 'py1090-python Documentation',
+		(master_doc, 'py1090', 'py1090 Documentation',
 		 [author], 1)
 ]
 
@@ -304,8 +304,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-	(master_doc, 'py1090-python', 'py1090-python Documentation',
-	 author, 'py1090-python', 'One line description of project.',
+	(master_doc, 'py1090', 'py1090 Documentation',
+	 author, 'py1090', 'One line description of project.',
 	 'Miscellaneous'),
 ]
 
