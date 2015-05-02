@@ -1,0 +1,4 @@
+# pin old napoleon version for ReadTheDocs
+
+sphinx
+sphinxcontrib-napoleon==0.2.11

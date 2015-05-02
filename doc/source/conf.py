@@ -17,6 +17,8 @@ import sys
 import os
 import shlex
 
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -31,13 +33,18 @@ sys.path.insert(0, os.path.abspath('../..'))
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.napoleon',
+	'sphinx.ext.autodoc',
+	'sphinx.ext.intersphinx',
+	'sphinx.ext.coverage',
+	'sphinx.ext.mathjax',
+	'sphinx.ext.viewcode'
 ]
+
+if on_rtd:
+	extensions.append('sphinxcontrib.napoleon')
+else:
+	extensions.append('sphinx.ext.napoleon')
+
 napoleon_use_ivar = True
 
 # Add any paths that contain templates here, relative to this directory.
@@ -118,29 +125,28 @@ todo_include_todos = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
-    html_theme = 'default'
+	html_theme = 'default'
 else:
-    html_theme = 'classic'
+	html_theme = 'classic'
 
-    html_theme_options = {
-      "sidebarbgcolor": "#f2f2f2",
-      "sidebartextcolor": "#000000",
-      "sidebarlinkcolor": "#101010",
+	html_theme_options = {
+		"sidebarbgcolor": "#f2f2f2",
+		"sidebartextcolor": "#000000",
+		"sidebarlinkcolor": "#101010",
 
-      "headbgcolor": "#f2f2f2",
-      "headtextcolor": "#101010",
+		"headbgcolor": "#f2f2f2",
+		"headtextcolor": "#101010",
 
-      "footerbgcolor": "#101010",
-      "footertextcolor": "#ffffff",
+		"footerbgcolor": "#101010",
+		"footertextcolor": "#ffffff",
 
-      "relbarbgcolor": "#101010",
-      "relbartextcolor": "#ffffff",
+		"relbarbgcolor": "#101010",
+		"relbartextcolor": "#ffffff",
 
-      "bodyfont": "Open Sans, sans-serif",
-      "headfont": "Open Sans, sans-serif",
-    }
+		"bodyfont": "Open Sans, sans-serif",
+		"headfont": "Open Sans, sans-serif",
+	}
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -254,8 +260,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'py1090-python.tex', 'py1090-python Documentation',
-   'Jonas Lieb', 'manual'),
+	(master_doc, 'py1090-python.tex', 'py1090-python Documentation',
+	 'Jonas Lieb', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -284,8 +290,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'py1090-python', 'py1090-python Documentation',
-     [author], 1)
+		(master_doc, 'py1090-python', 'py1090-python Documentation',
+		 [author], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -298,9 +304,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  (master_doc, 'py1090-python', 'py1090-python Documentation',
-   author, 'py1090-python', 'One line description of project.',
-   'Miscellaneous'),
+	(master_doc, 'py1090-python', 'py1090-python Documentation',
+	 author, 'py1090-python', 'One line description of project.',
+	 'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.
@@ -318,8 +324,8 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
-  'https://docs.python.org/3.4': None,
-  'http://matplotlib.org/basemap': None
+	'https://docs.python.org/3.4': None,
+	'http://matplotlib.org/basemap': None
 }
 
 # Autoclass options
