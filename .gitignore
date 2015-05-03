@@ -1,7 +1,11 @@
 __pycache__
 *.pyc
 
+doc/build
+doc/*.pdf
 examples/*.txt
 myfiles
 
 *.sublime-project
+*.sublime-workspace
+
