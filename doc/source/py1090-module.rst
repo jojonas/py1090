@@ -15,3 +15,9 @@ BaseStation Message
 -------------------
 .. autoclass:: Message
 	:member-order: bysource
+
+
+Collection of flights
+---------------------
+.. autoclass:: FlightCollection
+.. autoclass:: py1090.collection.FlightCollectionEntry
