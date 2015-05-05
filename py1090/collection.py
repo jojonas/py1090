@@ -53,7 +53,7 @@ class FlightCollection:
 		"""
 		for message in iterable:
 			if not isinstance(message, Message):
-				message = Message.from_string(item)
+				message = Message.from_string(message)
 			self.add(message)
 
 class FlightCollectionEntry:
